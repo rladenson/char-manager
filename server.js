@@ -12,6 +12,7 @@ const db = mongoose.connection;
 app.listen(port, () => console.log("listening on port ", port));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 app.use(methodOverride("_method"));
 app.use("/character", characterController);
 mongoose.connect(mongoURI + "char-manager", () => {

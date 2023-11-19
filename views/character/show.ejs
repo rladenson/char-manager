@@ -4,6 +4,7 @@
         <%- include("../partials/head.ejs") %>
     </head>
     <body>
+        <%- include("../partials/header.ejs") %>
         <img src="<%=character.image%>" />
         <h1><%=character.name%></h1>
         <% for(let i = 3; i < Object.keys(character["_doc"]).length - 1; i++) {

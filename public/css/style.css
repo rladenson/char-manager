@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+}
+#header {
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    font-family: "nelson", sans-serif;
+    position: relative;
+}
+#header a {
+    color: unset;
+    text-decoration: unset;
+}
+#header > * {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+}
+#header > a {
+    font-size: 16pt;
+    font-weight: 700;
+    font-style: normal;
+}
+#header > #mini-links {
+    padding-left: 2em;
+}
+#mini-links,
+.spacer {
+    flex-grow: 1;
+}
+.fa-solid {
+    padding: 10px;
+    font-size: 16pt;
+}
+.mobile-only {
+    display: none;
+}
+@media (max-width: 500px) {
+    .mobile-only {
+        display: unset;
+    }
+    #mini-links {
+        display: none;
+    }
+}
