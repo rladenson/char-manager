@@ -16,4 +16,23 @@ router.get("/new", (req, res) => {
     res.render("character/new.ejs");
 });
 
+// DELETE
+
+// UPDATE
+
+// CREATE
+router.post("", (req, res) => {
+    Character.create(req.body, (err, char) => {
+        if (err) {
+            res.send("error");
+        } else {
+            res.redirect(`/character/${char.id}`);
+        }
+    });
+});
+
+// EDIT
+
+// SHOW
+
 module.exports = router;
