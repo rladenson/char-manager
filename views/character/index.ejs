@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Character Manager</title>
+    </head>
+    <body>
+        <h1>Characters</h1>
+        <ul>
+            <% for(let i = 0; i < characters.length; i++) { %>
+            <li>
+                <a href="/character/<%=characters[i].id%>">
+                    <div>
+                        <img src="<%=characters[i].image%>" /><br />
+                        <%=characters[i].name%><br />
+                        <em><%=characters[i].quote%></em>
+                    </div>
+                </a>
+            </li>
+            <% } %>
+        </ul>
+    </body>
+</html>

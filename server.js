@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-//const pathController = require("./controllers/path.js");
+const characterController = require("./controllers/characters.js");
 
 const mongoURI = process.env.MONGOURI || "mongodb://127.0.0.1:27017/";
 const db = mongoose.connection;
@@ -13,7 +13,7 @@ app.listen(port, () => console.log("listening on port ", port));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-//app.use("/path", pathController);
+app.use("/character", characterController);
 mongoose.connect(mongoURI + "char-manager", () => {
     console.log("The connection with mongo is established");
 });
