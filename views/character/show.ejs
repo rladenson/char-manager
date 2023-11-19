@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Character Manager</title>
+    </head>
+    <body>
+        <img src="<%=character.image%>" />
+        <h1><%=character.name%></h1>
+        <% for(let i = 3; i < Object.keys(character["_doc"]).length - 1; i++) {
+        %> <% if(character[Object.keys(character["_doc"])[i]]) { %>
+        <%=Object.keys(character["_doc"])[i]%>:
+        <%=character[Object.keys(character["_doc"])[i]]%>
+        <br />
+        <% } %><% } %>
+    </body>
+</html>

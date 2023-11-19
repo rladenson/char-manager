@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const characterSchema = new Schema({
     name: { type: String, required: true },
-    quote: String,
     image: String,
+    quote: String,
     biography: String,
     age: Number,
     personality: String,

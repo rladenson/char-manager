@@ -34,5 +34,9 @@ router.post("", (req, res) => {
 // EDIT
 
 // SHOW
+router.get("/:id", async (req, res) => {
+    const character = await Character.findById(req.params.id);
+    res.render("character/show.ejs", { character: character });
+});
 
 module.exports = router;
