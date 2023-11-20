@@ -26,7 +26,6 @@ body {
 #header > #mini-links {
     padding-left: 2em;
 }
-#mini-links,
 .spacer {
     flex-grow: 1;
 }
@@ -34,13 +33,7 @@ body {
     padding: 10px;
     font-size: 16pt;
 }
-.mobile-only {
-    display: none;
-}
 @media (max-width: 500px) {
-    .mobile-only {
-        display: unset;
-    }
     #mini-links {
         display: none;
     }
