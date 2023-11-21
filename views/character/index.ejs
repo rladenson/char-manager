@@ -5,19 +5,21 @@
     </head>
     <body>
         <%- include("../partials/header.ejs") %>
-        <h1>Characters</h1>
-        <ul>
-            <% for(let i = 0; i < characters.length; i++) { %>
-            <li>
-                <a href="/character/<%=characters[i].id%>">
-                    <div>
-                        <img src="<%=characters[i].image%>" /><br />
-                        <%=characters[i].name%><br />
-                        <em><%=characters[i].quote%></em>
-                    </div>
-                </a>
-            </li>
-            <% } %>
-        </ul>
+        <main>
+            <h1>Characters</h1>
+            <ul id="char-list">
+                <% for(let i = 0; i < characters.length; i++) { %>
+                <li>
+                    <a href="/character/<%=characters[i].id%>">
+                        <div class="card">
+                            <strong><%=characters[i].name%></strong><br />
+                            <img src="<%=characters[i].image%>" /><br />
+                            <em><%=characters[i].quote%></em>
+                        </div>
+                    </a>
+                </li>
+                <% } %>
+            </ul>
+        </main>
     </body>
 </html>

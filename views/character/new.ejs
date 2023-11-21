@@ -5,54 +5,56 @@
     </head>
     <body>
         <%- include("../partials/header.ejs") %>
-        <h1>New Character</h1>
-        <p>
-            <a href="/character"><button>Back</button></a>
-        </p>
-        <form action="/character" method="POST">
-            <table>
-                <tr>
-                    <td>Name:</td>
-                    <td><input type="text" name="name" /></td>
-                </tr>
-                <tr>
-                    <td>Image:</td>
-                    <td><input type="text" name="image" /></td>
-                </tr>
-                <tr>
-                    <td>Age:</td>
-                    <td><input type="number" name="age" /></td>
-                </tr>
-                <tr>
-                    <td>Career:</td>
-                    <td><input type="text" name="career" /></td>
-                </tr>
-                <tr>
-                    <td>Species:</td>
-                    <td><input type="text" name="species" /></td>
-                </tr>
-                <tr>
-                    <td>Quote:</td>
-                    <td><textarea name="quote"></textarea></td>
-                </tr>
-                <tr>
-                    <td>Bio:</td>
-                    <td><textarea name="biography"></textarea></td>
-                </tr>
-                <tr>
-                    <td>Personality:</td>
-                    <td><textarea name="personality"></textarea></td>
-                </tr>
-                <tr>
-                    <td>
-                        <span title="Seperate with commas">
-                            Magical Abilities:
-                        </span>
-                    </td>
-                    <td><textarea name="magicalAbilities"></textarea></td>
-                </tr>
-            </table>
-            <input type="submit" value="Submit" />
-        </form>
+        <main>
+            <h1>New Character</h1>
+            <p>
+                <a href="/character"><button>Back</button></a>
+            </p>
+            <form action="/character" method="POST">
+                <table>
+                    <tr>
+                        <td>Name:</td>
+                        <td><input type="text" name="name" /></td>
+                    </tr>
+                    <tr>
+                        <td>Image:</td>
+                        <td><input type="text" name="image" /></td>
+                    </tr>
+                    <tr>
+                        <td>Age:</td>
+                        <td><input type="number" name="age" /></td>
+                    </tr>
+                    <tr>
+                        <td>Career:</td>
+                        <td><input type="text" name="career" /></td>
+                    </tr>
+                    <tr>
+                        <td>Species:</td>
+                        <td><input type="text" name="species" /></td>
+                    </tr>
+                    <tr>
+                        <td>Quote:</td>
+                        <td><textarea name="quote"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Bio:</td>
+                        <td><textarea name="biography"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Personality:</td>
+                        <td><textarea name="personality"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span title="Seperate with commas">
+                                Magical Abilities:
+                            </span>
+                        </td>
+                        <td><textarea name="magicalAbilities"></textarea></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Submit" />
+            </form>
+        </main>
     </body>
 </html>
