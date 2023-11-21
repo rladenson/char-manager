@@ -7,6 +7,7 @@
         <%- include("../partials/header.ejs") %>
         <main>
             <h1>Characters</h1>
+            <a href="/character/new"><button>New Character</button></a>
             <ul id="char-list">
                 <% for(let i = 0; i < characters.length; i++) { %>
                 <li>
