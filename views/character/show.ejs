@@ -6,14 +6,33 @@
     <body>
         <%- include("../partials/header.ejs") %>
         <main>
-            <img src="<%=character.image%>" />
+            <p>
+                <a href="/character"><button>Back</button></a>
+            </p>
+            <img src="<%=character.image%>" id="show-image" />
             <h1><%=character.name%></h1>
-            <% for(let i = 3; i < Object.keys(character["_doc"]).length - 1;
-            i++) { %> <% if(character[Object.keys(character["_doc"])[i]]) { %>
-            <%=Object.keys(character["_doc"])[i]%>:
-            <%=character[Object.keys(character["_doc"])[i]]%>
+            <% for(let i = 3; i < Object.keys(character._doc).length - 1; i++) {
+            %> <% if(character[Object.keys(character._doc)[i]] &&
+            character[Object.keys(character._doc)[i]].length !== 0) { %>
+            <span class="capitalize"><%=Object.keys(character._doc)[i]%></span>:
+            <%=character[Object.keys(character._doc)[i]]%>
             <br />
             <% } %><% } %>
+            <br />
+            <form>
+                <input
+                    type="submit"
+                    value="Edit"
+                    formaction="/character/<%=character.id%>/edit"
+                    formmethod="GET"
+                />
+                <input
+                    type="submit"
+                    value="Delete"
+                    formaction="/character/<%=character.id%>?_method=DELETE"
+                    formmethod="POST"
+                />
+            </form>
         </main>
     </body>
 </html>

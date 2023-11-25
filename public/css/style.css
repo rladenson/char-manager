@@ -86,6 +86,14 @@ main {
     display: inline-block;
     width: 100%;
 }
+#show-image {
+    float: left;
+    max-width: 40vw;
+    max-height: 70vh;
+}
+.capitalize {
+    text-transform: capitalize;
+}
 
 @media (max-width: 500px) {
     #mini-links {
