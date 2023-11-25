@@ -17,6 +17,10 @@ router.get("/new", (req, res) => {
 });
 
 // DELETE
+router.delete("/:id", async (req, res) => {
+    await Character.findByIdAndDelete(req.params.id);
+    res.redirect("/character");
+});
 
 // UPDATE
 
