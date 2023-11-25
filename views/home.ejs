@@ -6,5 +6,8 @@
     <body>
         <%- include("./partials/header.ejs") %>
         <h1>Home</h1>
+        <% if(user) { %>
+            Hello <%=user.username%>!
+        <% } %>
     </body>
 </html>
