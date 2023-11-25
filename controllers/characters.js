@@ -26,6 +26,11 @@ router.delete("/:id", async (req, res) => {
 
 // CREATE
 router.post("", (req, res) => {
+    if (req.body.magicalAbilities === "") {
+        req.body.magicalAbilities = [];
+    } else {
+        req.body.magicalAbilities = req.body.magicalAbilities.split(/, ?/);
+    }
     Character.create(req.body, (err, char) => {
         if (err) {
             res.send("error");
