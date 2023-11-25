@@ -20,5 +20,5 @@ mongoose.connect(mongoURI + "char-manager", () => {
 });
 
 app.get("/", (req, res) => {
-    res.send("Welcome to character manager!");
+    res.render("home.ejs");
 });
