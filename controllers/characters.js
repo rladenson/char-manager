@@ -23,6 +23,16 @@ router.delete("/:id", async (req, res) => {
 });
 
 // UPDATE
+router.put("/:id", async (req, res) => {
+    if (req.body.magicalAbilities === "") {
+        req.body.magicalAbilities = [];
+    } else {
+        req.body.magicalAbilities = req.body.magicalAbilities.split(/, ?/);
+    }
+    await Character.findByIdAndUpdate(req.params.id, req.body, {new: true});
+
+    res.redirect(`/character/${req.params.id}`);
+})
 
 // CREATE
 router.post("", (req, res) => {
@@ -41,6 +51,12 @@ router.post("", (req, res) => {
 });
 
 // EDIT
+router.get("/:id/edit", async (req, res) => {
+    const character = await Character.findById(req.params.id);
+    res.render("character/edit.ejs", {
+        character: character,
+    })
+})
 
 // SHOW
 router.get("/:id", async (req, res) => {
