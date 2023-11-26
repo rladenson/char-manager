@@ -41,6 +41,6 @@ mongoose.connect(mongoURI + "char-manager", () => {
 
 app.get("/", (req, res) => {
     res.render("home.ejs", {
-        user: req.session.currentUser,
+        currentUser: req.session.currentUser,
     });
 });

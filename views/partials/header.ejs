@@ -3,7 +3,9 @@
         <i class="fa-solid fa-house"></i> <span>Character Manager</span>
     </a>
     <div id="mini-links">
-        <a href="/characters">Your Characters</a>
+        <% if(currentUser) { %>
+            <a href="/characters">Your Characters</a>
+        <% } %>
     </div>
     <div class="spacer"></div>
     <i
@@ -13,9 +15,13 @@
 </div>
 <div id="hamburger-menu">
     <ul>
-        <li><a href="/users">User Page</a></li>
-        <li><a href="/characters">Your Characters</a></li>
-        <li><a href="/characters/new">New Character</a></li>
-        <li><a href="/sessions/logout">Logout</a></li>
+        <% if(currentUser) { %>
+            <li><a href="/users">User Page</a></li>
+            <li><a href="/characters">Your Characters</a></li>
+            <li><a href="/characters/new">New Character</a></li>
+            <li><a href="/sessions/logout">Logout</a></li>
+        <% } else { %>
+            <li><a href="/sessions/new">Login</a></li>
+        <% } %>
     </ul>
 </div>

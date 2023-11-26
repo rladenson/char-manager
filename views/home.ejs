@@ -7,8 +7,8 @@
         <%- include("./partials/header.ejs") %>
         <main>
             <h1>Home</h1>
-            <% if(user) { %>
-                Hello <%=user.username%>!
+            <% if(currentUser) { %>
+                Hello <%=currentUser.username%>!
             <% } else { %>
                 <a href="/sessions/new">
                     <button>Login</button>

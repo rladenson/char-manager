@@ -6,24 +6,39 @@ const Character = require("../models/character.js");
 
 // INDEX
 router.get("", async (req, res) => {
+    if(!req.session.currentUser) {
+        return res.redirect("/sessions/new");
+    }
     res.render("characters/index.ejs", {
         characters: await Character.find({}),
+        currentUser: req.session.currentUser,
     });
 });
 
 // NEW
 router.get("/new", (req, res) => {
-    res.render("characters/new.ejs");
+    if(!req.session.currentUser) {
+        return res.redirect("/sessions/new");
+    }
+    res.render("characters/new.ejs", {
+        currentUser: req.session.currentUser,
+    });
 });
 
 // DELETE
 router.delete("/:id", async (req, res) => {
+    if(!req.session.currentUser) {
+        return res.redirect("/sessions/new");
+    }
     await Character.findByIdAndDelete(req.params.id);
     res.redirect("/character");
 });
 
 // UPDATE
 router.put("/:id", async (req, res) => {
+    if(!req.session.currentUser) {
+        return res.redirect("/sessions/new");
+    }
     if (req.body.magicalAbilities === "") {
         req.body.magicalAbilities = [];
     } else {
@@ -36,6 +51,9 @@ router.put("/:id", async (req, res) => {
 
 // CREATE
 router.post("", (req, res) => {
+    if(!req.session.currentUser) {
+        return res.redirect("/sessions/new");
+    }
     if (req.body.magicalAbilities === "") {
         req.body.magicalAbilities = [];
     } else {
@@ -52,16 +70,23 @@ router.post("", (req, res) => {
 
 // EDIT
 router.get("/:id/edit", async (req, res) => {
+    if(!req.session.currentUser) {
+        return res.redirect("/sessions/new");
+    }
     const character = await Character.findById(req.params.id);
     res.render("characters/edit.ejs", {
         character: character,
+        currentUser: req.session.currentUser,
     })
 })
 
 // SHOW
 router.get("/:id", async (req, res) => {
     const character = await Character.findById(req.params.id);
-    res.render("characters/show.ejs", { character: character });
+    res.render("characters/show.ejs", {
+        character: character,
+        currentUser: req.session.currentUser,
+    });
 });
 
 module.exports = router;
