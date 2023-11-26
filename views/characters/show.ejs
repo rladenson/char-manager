@@ -7,7 +7,7 @@
         <%- include("../partials/header.ejs") %>
         <main>
             <p>
-                <a href="/character"><button>Back</button></a>
+                <a href="/characters"><button>Back</button></a>
             </p>
             <img src="<%=character.image%>" id="show-image" />
             <h1><%=character.name%></h1>
@@ -23,13 +23,13 @@
                 <input
                     type="submit"
                     value="Edit"
-                    formaction="/character/<%=character.id%>/edit"
+                    formaction="/characters/<%=character.id%>/edit"
                     formmethod="GET"
                 />
                 <input
                     type="submit"
                     value="Delete"
-                    formaction="/character/<%=character.id%>?_method=DELETE"
+                    formaction="/characters/<%=character.id%>?_method=DELETE"
                     formmethod="POST"
                 />
             </form>

@@ -30,7 +30,7 @@ app.use(
 );
 
 //controller middleware
-app.use("/character", characterController);
+app.use("/characters", characterController);
 app.use("/users", userController);
 app.use("/sessions", sessionsController);
 

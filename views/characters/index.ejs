@@ -7,11 +7,11 @@
         <%- include("../partials/header.ejs") %>
         <main>
             <h1>Characters</h1>
-            <a href="/character/new"><button>New Character</button></a>
+            <a href="/characters/new"><button>New Character</button></a>
             <ul id="char-list">
                 <% for(let i = 0; i < characters.length; i++) { %>
                 <li>
-                    <a href="/character/<%=characters[i].id%>">
+                    <a href="/characters/<%=characters[i].id%>">
                         <div class="card">
                             <strong><%=characters[i].name%></strong><br />
                             <img src="<%=characters[i].image%>" /><br />

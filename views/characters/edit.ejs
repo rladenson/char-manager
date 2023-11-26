@@ -8,12 +8,12 @@
         <main>
             <h1>Edit <%=character.name%></h1>
             <p>
-                <a href="/character/<%=character.id%>">
+                <a href="/characters/<%=character.id%>">
                     <button>Back</button>
                 </a>
             </p>
             <form 
-                action="/character/<%=character.id%>?_method=PUT" method="POST"
+                action="/characters/<%=character.id%>?_method=PUT" method="POST"
             >
                 <table>
                     <tr>

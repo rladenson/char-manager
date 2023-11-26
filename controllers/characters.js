@@ -6,14 +6,14 @@ const Character = require("../models/character.js");
 
 // INDEX
 router.get("", async (req, res) => {
-    res.render("character/index.ejs", {
+    res.render("characters/index.ejs", {
         characters: await Character.find({}),
     });
 });
 
 // NEW
 router.get("/new", (req, res) => {
-    res.render("character/new.ejs");
+    res.render("characters/new.ejs");
 });
 
 // DELETE
@@ -31,7 +31,7 @@ router.put("/:id", async (req, res) => {
     }
     await Character.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
-    res.redirect(`/character/${req.params.id}`);
+    res.redirect(`/characters/${req.params.id}`);
 })
 
 // CREATE
@@ -45,7 +45,7 @@ router.post("", (req, res) => {
         if (err) {
             res.send("error");
         } else {
-            res.redirect(`/character/${char.id}`);
+            res.redirect(`/characters/${char.id}`);
         }
     });
 });
@@ -53,7 +53,7 @@ router.post("", (req, res) => {
 // EDIT
 router.get("/:id/edit", async (req, res) => {
     const character = await Character.findById(req.params.id);
-    res.render("character/edit.ejs", {
+    res.render("characters/edit.ejs", {
         character: character,
     })
 })
@@ -61,7 +61,7 @@ router.get("/:id/edit", async (req, res) => {
 // SHOW
 router.get("/:id", async (req, res) => {
     const character = await Character.findById(req.params.id);
-    res.render("character/show.ejs", { character: character });
+    res.render("characters/show.ejs", { character: character });
 });
 
 module.exports = router;
