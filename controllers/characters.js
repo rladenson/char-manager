@@ -11,7 +11,9 @@ router.get("", async (req, res) => {
         return res.redirect("/sessions/new");
     }
     res.render("characters/index.ejs", {
-        characters: await Character.find({}),
+        characters: await Character.find({
+            user: req.session.currentUser._id,
+        }),
         currentUser: req.session.currentUser,
     });
 });
