@@ -5,9 +5,15 @@
     </head>
     <body>
         <%- include("./partials/header.ejs") %>
-        <h1>Home</h1>
-        <% if(user) { %>
-            Hello <%=user.username%>!
-        <% } %>
+        <main>
+            <h1>Home</h1>
+            <% if(user) { %>
+                Hello <%=user.username%>!
+            <% } else { %>
+                <a href="/sessions/new">
+                    <button>Login</button>
+                </a>
+            <% } %>
+        </main>
     </body>
 </html>

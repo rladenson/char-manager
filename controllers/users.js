@@ -16,8 +16,13 @@ users.post("/", (req, res) => {
         bcrypt.genSaltSync(10)
     );
     User.create(req.body, (err, createdUser) => {
-        console.log("user is created", createdUser);
-        res.redirect("/");
+        if(err) {
+            console.log("user with username already exists");
+            res.redirect("back");
+        } else {
+            console.log("user is created", createdUser);
+            res.redirect("/");
+        }
     });
 });
 
