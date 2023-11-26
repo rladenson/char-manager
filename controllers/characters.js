@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Character = require("../models/character.js");
+const User = require("../models/user.js");
 
 // ROUTES (I.N.D.U.C.E.S.)
 
@@ -30,8 +31,15 @@ router.delete("/:id", async (req, res) => {
     if(!req.session.currentUser) {
         return res.redirect("/sessions/new");
     }
-    await Character.findByIdAndDelete(req.params.id);
-    res.redirect("/character");
+    try {
+        await Character.findByIdAndDelete(req.params.id);
+        await User.findByIdAndUpdate(req.session.currentUser._id, {
+            $pull: { characters: req.params.id }
+        });
+    } catch (err) {
+        return res.send(`Error: ${err}`);
+    }
+    res.redirect("/characters");
 });
 
 // UPDATE
@@ -50,7 +58,7 @@ router.put("/:id", async (req, res) => {
 })
 
 // CREATE
-router.post("", (req, res) => {
+router.post("", async (req, res) => {
     if(!req.session.currentUser) {
         return res.redirect("/sessions/new");
     }
@@ -59,13 +67,23 @@ router.post("", (req, res) => {
     } else {
         req.body.magicalAbilities = req.body.magicalAbilities.split(/, ?/);
     }
-    Character.create(req.body, (err, char) => {
-        if (err) {
-            res.send("error");
-        } else {
-            res.redirect(`/characters/${char.id}`);
-        }
-    });
+    req.body.user = req.session.currentUser._id;
+    try {
+        const character = await Character.create(req.body);
+        await User.findByIdAndUpdate(req.session.currentUser._id, {
+            $push: { characters: character.id }
+        })
+        res.redirect(`/characters/${character.id}`);
+    } catch (err) {
+        res.send(`Error: ${err}`);
+    }
+    // , (err, char) => {
+    //     if (err) {
+    //         res.send("error");
+    //     } else {
+    //         res.redirect(`/characters/${char.id}`);
+    //     }
+    // });
 });
 
 // EDIT

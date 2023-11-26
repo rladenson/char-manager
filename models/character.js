@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const characterSchema = new Schema({
     name: { type: String, required: true },
+    user: { type: Schema.Types.ObjectId, ref: "User" },
     image: String,
     quote: String,
     biography: String,
