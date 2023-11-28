@@ -7,7 +7,7 @@
         <%- include("../partials/header.ejs") %>
         <main>
             <p>
-                <a href="/characters"><button>Back</button></a>
+                <a href="<%=referer%>"><button>Back</button></a>
             </p>
             <img src="<%=character.image%>" id="show-image" />
             <h1><%=character.name%></h1>

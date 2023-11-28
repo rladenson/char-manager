@@ -26,6 +26,7 @@ router.get("/new", (req, res) => {
     }
     res.render("characters/new.ejs", {
         currentUser: req.session.currentUser,
+        referer: req.headers.referer,
     });
 });
 
@@ -98,6 +99,7 @@ router.get("/:id/edit", async (req, res) => {
     res.render("characters/edit.ejs", {
         character: character,
         currentUser: req.session.currentUser,
+        referer: req.headers.referer,
     });
 });
 
@@ -107,6 +109,7 @@ router.get("/:id", async (req, res) => {
     res.render("characters/show.ejs", {
         character: character,
         currentUser: req.session.currentUser,
+        referer: req.headers.referer,
     });
 });
 
