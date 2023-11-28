@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const users = express.Router();
 const User = require("../models/user.js");
+const Character = require("../models/character.js");
 
 users.get("/new", (req, res) => {
     res.render("users/new.ejs", {
@@ -16,7 +17,7 @@ users.post("/", (req, res) => {
         bcrypt.genSaltSync(10)
     );
     User.create(req.body, (err, createdUser) => {
-        if(err) {
+        if (err) {
             console.log("user with username already exists");
             res.redirect("back");
         } else {
@@ -28,20 +29,37 @@ users.post("/", (req, res) => {
 });
 
 users.get("/", (req, res) => {
-    if(!req.session.currentUser) {
+    if (!req.session.currentUser) {
         return res.redirect("/sessions/new");
     }
     res.render("users/show.ejs", {
         currentUser: req.session.currentUser,
         user: req.session.currentUser,
-    })
-})
+    });
+});
 
 users.get("/:username", async (req, res) => {
     res.render("users/show.ejs", {
         currentUser: req.session.currentUser,
-        user: await User.findOne({username: req.params.username}),
-    })
-})
+        user: await User.findOne({ username: req.params.username }),
+    });
+});
+
+users.get("/:username/characters", async (req, res) => {
+    const user = await User.findOne({ username: req.params.username });
+    if (
+        req.session.currentUser &&
+        user.username === req.session.currentUser.username
+    ) {
+        return res.redirect("/characters");
+    }
+    res.render("characters/index.ejs", {
+        characters: await Character.find({
+            user: user.id,
+        }),
+        currentUser: req.session.currentUser,
+        user: user,
+    });
+});
 
 module.exports = users;

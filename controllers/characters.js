@@ -7,7 +7,7 @@ const User = require("../models/user.js");
 
 // INDEX
 router.get("", async (req, res) => {
-    if(!req.session.currentUser) {
+    if (!req.session.currentUser) {
         return res.redirect("/sessions/new");
     }
     res.render("characters/index.ejs", {
@@ -15,12 +15,13 @@ router.get("", async (req, res) => {
             user: req.session.currentUser._id,
         }),
         currentUser: req.session.currentUser,
+        user: req.session.currentUser,
     });
 });
 
 // NEW
 router.get("/new", (req, res) => {
-    if(!req.session.currentUser) {
+    if (!req.session.currentUser) {
         return res.redirect("/sessions/new");
     }
     res.render("characters/new.ejs", {
@@ -30,13 +31,13 @@ router.get("/new", (req, res) => {
 
 // DELETE
 router.delete("/:id", async (req, res) => {
-    if(!req.session.currentUser) {
+    if (!req.session.currentUser) {
         return res.redirect("/sessions/new");
     }
     try {
         await Character.findByIdAndDelete(req.params.id);
         await User.findByIdAndUpdate(req.session.currentUser._id, {
-            $pull: { characters: req.params.id }
+            $pull: { characters: req.params.id },
         });
     } catch (err) {
         return res.send(`Error: ${err}`);
@@ -46,7 +47,7 @@ router.delete("/:id", async (req, res) => {
 
 // UPDATE
 router.put("/:id", async (req, res) => {
-    if(!req.session.currentUser) {
+    if (!req.session.currentUser) {
         return res.redirect("/sessions/new");
     }
     if (req.body.magicalAbilities === "") {
@@ -54,14 +55,14 @@ router.put("/:id", async (req, res) => {
     } else {
         req.body.magicalAbilities = req.body.magicalAbilities.split(/, ?/);
     }
-    await Character.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    await Character.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
     res.redirect(`/characters/${req.params.id}`);
-})
+});
 
 // CREATE
 router.post("", async (req, res) => {
-    if(!req.session.currentUser) {
+    if (!req.session.currentUser) {
         return res.redirect("/sessions/new");
     }
     if (req.body.magicalAbilities === "") {
@@ -73,8 +74,8 @@ router.post("", async (req, res) => {
     try {
         const character = await Character.create(req.body);
         await User.findByIdAndUpdate(req.session.currentUser._id, {
-            $push: { characters: character.id }
-        })
+            $push: { characters: character.id },
+        });
         res.redirect(`/characters/${character.id}`);
     } catch (err) {
         res.send(`Error: ${err}`);
@@ -90,15 +91,15 @@ router.post("", async (req, res) => {
 
 // EDIT
 router.get("/:id/edit", async (req, res) => {
-    if(!req.session.currentUser) {
+    if (!req.session.currentUser) {
         return res.redirect("/sessions/new");
     }
     const character = await Character.findById(req.params.id);
     res.render("characters/edit.ejs", {
         character: character,
         currentUser: req.session.currentUser,
-    })
-})
+    });
+});
 
 // SHOW
 router.get("/:id", async (req, res) => {

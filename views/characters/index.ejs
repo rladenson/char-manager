@@ -6,8 +6,15 @@
     <body>
         <%- include("../partials/header.ejs") %>
         <main>
-            <h1>Characters</h1>
-            <a href="/characters/new"><button>New Character</button></a>
+            <h1>
+                <% if(!currentUser || user.username !== currentUser.username) { %>
+                    <%=user.username%>'s
+                <% } %>
+                Characters
+            </h1>
+            <% if(currentUser && user.username === currentUser.username) { %>
+                <a href="/characters/new"><button>New Character</button></a>
+            <% } %>
             <ul id="char-list">
                 <% for(let i = 0; i < characters.length; i++) { %>
                 <li>
