@@ -7,7 +7,6 @@ const Character = require("../models/character.js");
 users.get("/new", (req, res) => {
     res.render("users/new.ejs", {
         currentUser: req.session.currentUser,
-        referer: req.headers.referer,
     });
 });
 
@@ -36,7 +35,6 @@ users.get("/", (req, res) => {
     res.render("users/show.ejs", {
         currentUser: req.session.currentUser,
         user: req.session.currentUser,
-        referer: req.headers.referer,
     });
 });
 
@@ -44,7 +42,6 @@ users.get("/:username", async (req, res) => {
     res.render("users/show.ejs", {
         currentUser: req.session.currentUser,
         user: await User.findOne({ username: req.params.username }),
-        referer: req.headers.referer,
     });
 });
 

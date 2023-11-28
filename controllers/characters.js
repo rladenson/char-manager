@@ -24,9 +24,13 @@ router.get("/new", (req, res) => {
     if (!req.session.currentUser) {
         return res.redirect("/sessions/new");
     }
+    let referer = req.headers.referer;
+    if(!req.headers.referer || req.headers.referer.match(/\/new$/)) {
+        referer = "/characters";
+    }
     res.render("characters/new.ejs", {
         currentUser: req.session.currentUser,
-        referer: req.headers.referer,
+        referer: referer,
     });
 });
 
@@ -96,20 +100,28 @@ router.get("/:id/edit", async (req, res) => {
         return res.redirect("/sessions/new");
     }
     const character = await Character.findById(req.params.id);
+    let referer = req.headers.referer;
+    if(!req.headers.referer || req.headers.referer.match(/\/.*\/edit$/)) {
+        referer = `/characters/${req.params.id}`;
+    }
     res.render("characters/edit.ejs", {
         character: character,
         currentUser: req.session.currentUser,
-        referer: req.headers.referer,
+        referer: referer,
     });
 });
 
 // SHOW
 router.get("/:id", async (req, res) => {
     const character = await Character.findById(req.params.id);
+    let referer = req.headers.referer;
+    if(!req.headers.referer || req.headers.referer.match(/\/[^/]*$/)) {
+        referer = "/characters";
+    }
     res.render("characters/show.ejs", {
         character: character,
         currentUser: req.session.currentUser,
-        referer: req.headers.referer,
+        referer: referer,
     });
 });
 
