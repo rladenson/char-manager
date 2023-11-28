@@ -28,17 +28,26 @@ users.post("/", (req, res) => {
     });
 });
 
-users.get("/", (req, res) => {
+users.get("/", async (req, res) => {
     if (!req.session.currentUser) {
         return res.redirect("/sessions/new");
     }
+    const user = await User.findById(req.session.currentUser._id);
+    const friends = [];
+    for(let i = 0; i < user.friends.length; i++) {
+        friends.push(await User.findById(user.friends[i]));
+    }
+    user.friends = friends;
     res.render("users/show.ejs", {
-        currentUser: req.session.currentUser,
-        user: req.session.currentUser,
+        currentUser: user,
+        user: user,
     });
 });
 
 users.get("/:username", async (req, res) => {
+    if(req.session.username === req.params.username) {
+        return res.redirect("/users");
+    }
     res.render("users/show.ejs", {
         currentUser: req.session.currentUser,
         user: await User.findOne({ username: req.params.username }),
