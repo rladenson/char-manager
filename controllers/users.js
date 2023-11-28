@@ -21,6 +21,7 @@ users.post("/", (req, res) => {
             res.redirect("back");
         } else {
             console.log("user is created", createdUser);
+            req.session.currentUser = createdUser;
             res.redirect("/");
         }
     });
