@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include("../partials/head.ejs") %>
+    </head>
+    <body>
+        <%- include("../partials/header.ejs") %>
+        <main>
+            <h1><%=user.username%></h1>
+            <h3>
+                <a href="/users/<%=user.username%>/characters">Characters</a>
+            </h3>
+        </main>
+    </body>
+</html>

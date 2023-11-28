@@ -27,4 +27,21 @@ users.post("/", (req, res) => {
     });
 });
 
+users.get("/", (req, res) => {
+    if(!req.session.currentUser) {
+        return res.redirect("/sessions/new");
+    }
+    res.render("users/show.ejs", {
+        currentUser: req.session.currentUser,
+        user: req.session.currentUser,
+    })
+})
+
+users.get("/:username", async (req, res) => {
+    res.render("users/show.ejs", {
+        currentUser: req.session.currentUser,
+        user: await User.findOne({username: req.params.username}),
+    })
+})
+
 module.exports = users;
