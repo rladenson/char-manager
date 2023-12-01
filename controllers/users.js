@@ -34,7 +34,7 @@ users.get("/", async (req, res) => {
     }
     const user = await User.findById(req.session.currentUser._id);
     const friends = [];
-    for(let i = 0; i < user.friends.length; i++) {
+    for (let i = 0; i < user.friends.length; i++) {
         friends.push(await User.findById(user.friends[i]));
     }
     user.friends = friends;
@@ -44,8 +44,39 @@ users.get("/", async (req, res) => {
     });
 });
 
+users.post("/:id/friends", (req, res) => {
+    User.findByIdAndUpdate(
+        req.params.id,
+        { $push: { friends: req.body.user } },
+        { new: true },
+        (err, user) => {
+            if (err) {
+                res.send(err);
+            } else {
+                req.session.currentUser = user;
+                res.redirect("back");
+            }
+        }
+    );
+});
+users.delete("/:id/friends", (req, res) => {
+    User.findByIdAndUpdate(
+        req.params.id,
+        { $pull: { friends: req.body.user } },
+        { new: true },
+        (err, user) => {
+            if (err) {
+                res.send(err);
+            } else {
+                req.session.currentUser = user;
+                res.redirect("back");
+            }
+        }
+    );
+});
+
 users.get("/:username", async (req, res) => {
-    if(req.session.username === req.params.username) {
+    if (req.session.username === req.params.username) {
         return res.redirect("/users");
     }
     res.render("users/show.ejs", {
