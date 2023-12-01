@@ -35,8 +35,12 @@ app.use("/users", userController);
 app.use("/sessions", sessionsController);
 
 app.listen(port, () => console.log("listening on port ", port));
-mongoose.connect(mongoURI + "char-manager", () => {
-    console.log("The connection with mongo is established");
+mongoose.connect(mongoURI + "char-manager", (err) => {
+    if(err) {
+        console.log("ERROR: ", err)
+    } else {
+        console.log("The connection with mongo is established");
+    }
 });
 
 app.get("/", (req, res) => {
